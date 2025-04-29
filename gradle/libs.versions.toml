@@ -1,0 +1,2 @@
+[libraries]
+adventure-api = { group = "net.kyori", name = "adventure-api", version = "4.20.0" }
