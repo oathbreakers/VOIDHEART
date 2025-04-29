@@ -2,13 +2,16 @@ package oathbreakers.voidheart.commands
 
 import net.kyori.adventure.audience.Audience
 
-class CommandBuilder<C, A>(val name: String) where A : Audience, C : CommandContext<A> {
+class CommandBuilder<C, A>(
+    internal val parentName: String?,
+    val name: String
+) where A : Audience, C : CommandContext<A> {
     internal val children = mutableListOf<CommandBuilder<C, A>>()
     internal val args = mutableSetOf<Pair<String, CommandArgument<A, *>>>()
     internal var executor: (suspend C.() -> Unit)? = null
 
     fun literal(name: String, block: CommandBuilder<C, A>.() -> Unit = {}): CommandBuilder<C, A> {
-        children.add(CommandBuilder<C, A>(name).also(block))
+        children.add(CommandBuilder<C, A>(this.name, name).also(block))
         return this
     }
 

@@ -1,13 +1,41 @@
 package oathbreakers.voidheart.commands
 
+import kotlinx.coroutines.runBlocking
 import net.kyori.adventure.audience.Audience
 
 class CommandTree<C, A> where A : Audience, C : CommandContext<A> {
     private val root = CommandInfo<C, A>("", mutableListOf(), emptySet(), null)
 
+    private fun checkAmbiguity(builder: CommandBuilder<C, A>): Result<Unit> {
+        val formattedName = if (builder.parentName != null) {
+            "${builder.parentName} ${builder.name}"
+        } else {
+            builder.name
+        }
+
+        val subCommandNames = builder.children.map { it.name }.toSet()
+        if (subCommandNames.size != builder.children.size) {
+            return Result.failure(IllegalStateException("Command '$formattedName' has two or more subcommands with the same name"))
+        }
+
+        if (builder.args.isNotEmpty() && builder.children.isNotEmpty()) {
+            return Result.failure(IllegalStateException("Command '$formattedName' has both arguments and subcommands, which results in ambiguous execution"))
+        }
+
+        builder.children.forEach {
+            val childResult = checkAmbiguity(it)
+            if (childResult.isFailure) return childResult
+        }
+
+        return Result.success(Unit)
+    }
+
     fun register(name: String, block: CommandBuilder<C, A>.() -> Unit) {
-        val builder = CommandBuilder<C, A>(name)
+        val builder = CommandBuilder<C, A>(null, name)
         block(builder)
+
+        val potentiallyAmbiguous = checkAmbiguity(builder)
+        potentiallyAmbiguous.getOrThrow()
 
         fun mapChildren(builder: CommandBuilder<C, A>): MutableList<CommandInfo<C, A>> {
             return builder.children.map { child ->
