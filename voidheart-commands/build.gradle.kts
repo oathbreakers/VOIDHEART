@@ -1,20 +1,10 @@
 repositories {
-    mavenCentral()
+    maven {
+        name = "papermc"
+        url = uri("https://repo.papermc.io/repository/maven-public/")
+    }
 }
 
 dependencies {
-    implementation(kotlin("reflect"))
-    implementation(kotlin("stdlib"))
-    implementation(libs.adventure.api)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-
-    testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-junit5"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-    testLogging {
-        events("passed", "skipped", "failed")
-    }
+    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
 }
