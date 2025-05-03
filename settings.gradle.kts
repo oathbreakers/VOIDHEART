@@ -9,3 +9,4 @@ pluginManagement {
 
 include("voidheart-commands")
 include("voidheart-core-folia")
+include("voidheart-commands-paper")

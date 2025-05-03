@@ -19,6 +19,8 @@ dependencies {
     implementation(libs.flyway.pg)
     implementation(libs.postgres)
     implementation(libs.hikaricp)
+
+    implementation(project(":voidheart-commands-paper"))
 }
 
 runPaper.folia.registerTask()

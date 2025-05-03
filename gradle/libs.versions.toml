@@ -14,6 +14,7 @@ flyway-pg = { module = "org.flywaydb:flyway-database-postgresql", version = "11.
 postgres = { module = "org.postgresql:postgresql", version = "42.7.5" }
 hikaricp = { module = "com.zaxxer:HikariCP", version = "5.0.1" }
 ktoml-core = { module = "com.akuleshov7:ktoml-core", version = "0.6.0" }
+brigadier = { module = "com.mojang:brigadier", version = "1.0.18" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-version" }
