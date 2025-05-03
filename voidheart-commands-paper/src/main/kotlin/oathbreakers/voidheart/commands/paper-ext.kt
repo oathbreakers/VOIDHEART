@@ -19,11 +19,7 @@ inline fun Commands.register(
     block(builder)
 
     val node = builder.build()
-    register(node)
-
-    aliases.forEach { alias ->
-        register(LiteralArgumentBuilder.literal<CommandSourceStack>(alias).redirect(node).build())
-    }
+    register(node, aliases.toList())
 }
 
 fun <Self> ArgumentBuilder<CommandSourceStack, Self>.requiresConsole() where Self : ArgumentBuilder<CommandSourceStack, Self> {
