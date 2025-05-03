@@ -16,16 +16,16 @@ private fun registerTeleportCommand(cmds: Commands) {
                 val targetResolver = getArgument<PlayerSelectorArgumentResolver>("target")
                 val target = targetResolver.resolve(source).firstOrNull()
                 if (target == null) {
-                    source.sender.sendRichMessage("<red>No player found matching the selector.")
+                    sender.sendRichMessage("<red>No player found matching the selector.")
                     return@onExecute
                 }
 
-                source.executor?.teleportAsync(target.location, PlayerTeleportEvent.TeleportCause.COMMAND)
-                    ?.thenApply { successful ->
+                player.teleportAsync(target.location, PlayerTeleportEvent.TeleportCause.COMMAND)
+                    .thenApply { successful ->
                         if (successful) {
-                            source.sender.sendRichMessage("<green>Teleported to ${target.name}.")
+                            sender.sendRichMessage("<green>Teleported to ${target.name}.")
                         } else {
-                            source.sender.sendRichMessage("<red>Failed to teleport to ${target.name}.")
+                            sender.sendRichMessage("<red>Failed to teleport to ${target.name}.")
                         }
                     }
             }

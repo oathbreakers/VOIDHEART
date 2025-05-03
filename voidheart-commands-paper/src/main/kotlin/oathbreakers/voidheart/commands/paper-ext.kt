@@ -2,9 +2,12 @@ package oathbreakers.voidheart.commands
 
 import com.mojang.brigadier.builder.ArgumentBuilder
 import com.mojang.brigadier.builder.LiteralArgumentBuilder
+import com.mojang.brigadier.context.CommandContext
 import io.papermc.paper.command.brigadier.CommandSourceStack
 import io.papermc.paper.command.brigadier.Commands
+import org.bukkit.command.CommandSender
 import org.bukkit.command.ConsoleCommandSender
+import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 
 inline fun Commands.register(
@@ -37,3 +40,10 @@ fun <Self> ArgumentBuilder<CommandSourceStack, Self>.requiresPermission(permissi
     val existingRequirement = this.requirement
     requires { src -> existingRequirement.test(src) && src.sender.hasPermission(permission) }
 }
+
+inline val CommandContext<CommandSourceStack>.sender: CommandSender
+    get() = source.sender
+inline val CommandContext<CommandSourceStack>.executor: Entity?
+    get() = source.executor
+inline val CommandContext<CommandSourceStack>.player: Player
+    get() = source.executor!! as Player
