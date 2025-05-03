@@ -1,0 +1,7 @@
+name: VOIDSTAR
+version: '1.0' # TODO: Inject from gradle
+main: oathbreakers.voidheart.core.folia.CorePlugin
+api-version: '1.21.4'
+bootstrapper: oathbreakers.voidheart.core.folia.paper.PluginBootstrap
+loader: oathbreakers.voidheart.core.folia.paper.PluginLoader
+folia-supported: true

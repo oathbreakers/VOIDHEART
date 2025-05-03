@@ -1,2 +1,22 @@
+[versions]
+kotlin-version = "2.1.20"
+exposed-version = "0.60.0"
+koin = "4.1.0-Beta7"
+
+
 [libraries]
 adventure-api = { group = "net.kyori", name = "adventure-api", version = "4.20.0" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-logger = { module = "io.insert-koin:koin-logger-slf4j", version.ref = "koin" }
+exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed-version" }
+exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed-version" }
+exposed-migration = { module = "org.jetbrains.exposed:exposed-migration", version.ref = "exposed-version" }
+flyway = { module = "org.flywaydb:flyway-core", version = "11.7.0" }
+flyway-pg = { module = "org.flywaydb:flyway-database-postgresql", version = "11.7.0" }
+postgres = { module = "org.postgresql:postgresql", version = "42.7.5" }
+hikaricp = { module = "com.zaxxer:HikariCP", version = "5.0.1" }
+ktoml-core = { module = "com.akuleshov7:ktoml-core", version = "0.6.0" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-version" }
+kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-version" }

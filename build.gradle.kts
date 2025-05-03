@@ -1,6 +1,8 @@
 plugins {
     id("java")
-    kotlin("jvm") version "2.1.20"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.plugin.serialization) apply false
+    id("com.gradleup.shadow") version "8.3.5" apply false
 }
 
 allprojects {
@@ -12,4 +14,12 @@ allprojects {
 
     group = "oathbreakers"
     version = "0.0.0-DEV"
+
+    java {
+        toolchain.languageVersion = JavaLanguageVersion.of(21)
+    }
+
+    kotlin {
+        jvmToolchain(21)
+    }
 }
