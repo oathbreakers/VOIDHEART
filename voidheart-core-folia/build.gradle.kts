@@ -1,5 +1,5 @@
 plugins {
-    id("io.papermc.paperweight.userdev") version "2.0.0-beta.16"
+    id("io.papermc.paperweight.userdev")
     id("xyz.jpenilla.run-paper") version "2.3.1"
     id("com.gradleup.shadow")
 
@@ -21,6 +21,7 @@ dependencies {
     implementation(libs.hikaricp)
 
     implementation(project(":voidheart-commands-paper"))
+    implementation(project(":voidheart-scoreboard-folia"))
 }
 
 runPaper.folia.registerTask()
